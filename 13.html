@@ -1,0 +1,62 @@
+<!-- //   var ul = document.createElement("ul");
+
+      //   var li1 = document.createElement("li");
+      //   var text1 = document.createTextNode("列表项1");
+      //   li1.appendChild(text1);
+      //   ul.appendChild(li1);
+
+      //   var li2 = document.createElement("li");
+      //   var text2 = document.createTextNode("列表项2");
+      //   li2.appendChild(text2);
+      //   ul.appendChild(li2);
+
+      //   var li3 = document.createElement("li");
+      //   var text3 = document.createTextNode("列表项3");
+      //   li3.appendChild(text3);
+      //   ul.appendChild(li3);
+
+      //   var li4 = document.createElement("li");
+      //   var text4 = document.createTextNode("列表项4");
+      //   li4.appendChild(text4);
+      //   ul.appendChild(li4);
+
+      //   document.body.appendChild(ul);
+      //   get...by...方法返回的body是一个元素集合，即一个整体 因而还需进行访问  但document.body是一个元素，所以不需要访问
+      ////
+      //
+      //化简版
+//       var ul = document.createElement("ul");
+
+//       var li1 = "<li>列表项1</li>";
+//       var li2 = "<li>列表项2</li>";
+//       var li3 = "<li>列表项3</li>";
+//       var li4 = "<li>列表项4</li>";
+//       ul.innerHTML = li1 + li2 + li3 + li4;
+//       document.body.appendChild(ul);
+     -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title></title>
+  </head>
+  <!-- <style>
+    .bt {
+      background-color: green;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      border-radius: 50%;
+      font-size: 16px;
+    }
+  </style> -->
+  <body>
+    <button class="bt" onclick="window.location.href='https://www.baidu.com/'">
+      跳转到百度
+    </button>
+  </body>
+  <script>
+    console.log(history); //输出history对象
+    console.log(history.length); //可以获取到当成访问的链接数量
+  </script>
+</html>
