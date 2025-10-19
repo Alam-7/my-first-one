@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+  letter-spacing: 0px;
+  font-weight: normal;
+  font-stretch: normal;
+  box-sizing: border-box;
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: #333;
+  text-decoration: none;
+}
+body {
+  font: 14px/1.5 "Microsoft Yahei", "Hiragino Sans GB", "Heiti SC",
+    "WenQuanYi Micro Hei", sans-serif;
+  color: #333;
+}
