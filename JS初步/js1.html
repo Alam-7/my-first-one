@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <style>
+      /* .active {
+        background-color: pink;
+      } */
+      h2 {
+        text-align: center;
+      }
+      table,
+      tr,
+      th,
+      td {
+        border: 1px solid black;
+      }
+      table {
+        margin: 0 auto;
+        background-color: pink;
+      }
+      button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+      div {
+        width: 400px;
+        margin: 0 auto;
+        border: 1px solid black;
+      }
+      /* .active {
+        background-color: pink;
+      } */
+    </style>
+  </head>
+  <body>
+    <!-- <button>1</button><button>2</button><button>3</button><button>4</button> -->
+
+    <div>
+      <h2>订单确认</h2>
+      <table>
+        <tr>
+          <th>产品名称</th>
+          <th>产品价格</th>
+          <th>数量</th>
+          <th>总价</th>
+          <th>收获地址</th>
+        </tr>
+        <tr>
+          <td id="name"></td>
+          <td id="price"></td>
+          <td id="number"></td>
+          <td id="total"></td>
+          <td id="address"></td>
+        </tr>
+      </table>
+      <button>确认提交</button>
+    </div>
+    <script>
+      //   alert("HELLO JS~");
+      //   let bts = document.getElementsByTagName("button");
+      //   for (let i = 0; i < bts.length; i++) {
+      //     bts[i].onclick = function () {
+      //       for (let j = 0; j < bts.length; j++) {
+      //         bts[j].classList.remove("active");
+      //       }
+      //       this.classList.add("active");
+      //     };
+      //   }
+      // alert("HELLO JS~")  分号会自动加 不需要一定加
+
+      // 输入与输出
+      //   document.write("HELLO JS~<br>");
+      //   console.log("hello js~");
+      //   prompt("请输入你的名字："); //提示 用户输入可以传输到后端
+
+      //   let age = prompt("请输入您的年龄：");
+      //   alert("您的年龄是：" + age);//+连接符拼接字符串
+
+      // let age=18;
+      // age=19;
+      // let age=20;
+      //只有下划线和$符号可以命名
+
+      //   let age = prompt("请输入您的年龄：");
+      //   let name = prompt("请输入您的名字：");
+      //   let gender = prompt("请输入您的性别：");
+      //   document.write(age, name, gender);
+      //   document.write(name);
+      //   document.write(gender);
+
+      //   let arr = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"];
+      //   console.log(arr[6]);
+
+      // 外部引入script时会忽略中间的script代码
+
+      //常量声明
+      //   const PI = 3.14;
+      //   PI = 3;
+
+      // NaN是一个计算错误  对这个“错误”的任何错误都是NaN
+
+      //单引号索引规则与Iflese类似都是就近原则 因而会好单双混用区分  千万不能叠用
+
+      //+  数字相加 字符相连， “拼接 ”  或者是数字与字符串相连（整型）
+      //   let a = 10;
+      //   document.write("我今年" + a + "岁了");  但很麻烦
+      //模板字符串
+      //   let age = prompt("请输入您的年龄：");
+      //   document.write(`你今年${age}岁了`);//熟悉语法 ${变量名}字符串化
+
+      //null加一仍然有值一 null空
+
+      //类型检测typeof
+      //   let num = 11;
+      //   console.log(typeof num);
+
+      //类型转换：js的弱类型 promrt获取的json都是字符串类型  不能直接相加
+      //隐式转换
+      //   console.log(1 + 1); //数字
+      //   console.log("1" + 1); //提升至字符串类型  string  任何数据和字符串相加都会变为字符串型
+      //   console.log(typeof ("1" + 1));
+      //   console.log(+"11"); //+前置将字符串转换为数字类型
+      //   console.log(typeof +"11");
+
+      //显示转换 Number()强转
+      //   let ps = Number(prompt("请输入一个数字："));
+      //   console.log(ps);
+      //   console.log(Number(prompt("请输入一个数字：")));
+      //   let a = "3.14px";
+      //   console.log(parseInt(a)); //取整 同时转换为数字类型
+      //   console.log(parseInt("abc123")); //NaN  只能取开头
+      //   console.log(parseFloat(a)); //取带小数部分 数据类型
+
+      //   let a = prompt("请输入一个数字：");//因为prompt始终用json语言
+      //   let b = prompt("请再输入一个数字：");
+      //   alert(Number(a) + Number(b));
+      //   console.log(typeof (Number(a) + Number(b)));
+      //优化
+      //   let a = +prompt("请输入一个数字：");
+      //   let b = +prompt("请再输入一个数字：");
+      //   alert(`两个数相加的和是：${a + b}`); //一定记住是反引号  引号直接就是字符串化
+
+      let name = prompt("请输入您购买的产品名称：");
+      let price = +prompt("请输入产品价格：");
+      let num = +prompt("请输入购买数量：");
+      let total = price * num;
+      let address = prompt("请输入收获地址：");
+
+      //   document.write(`<div>
+      //   <h2>订单确认</h2>
+      //   <table>
+      //     <tr>
+      //       <th>产品名称</th>
+      //       <th>产品价格</th>
+      //       <th>数量</th>
+      //       <th>总价</th>
+      //       <th>收获地址</th>
+      //     </tr>
+      //     <tr>
+      //       <td>${name}</td>
+      //       <td>${price}</td>
+      //       <td>${num}</td>
+      //       <td>${total}</td>
+      //       <td>${address}</td>
+      //     </tr>
+      //   </table>
+      //   <button>确认提交</button>
+      // </div>`);//反引号内可以换行
+
+      document.getElementById("name").innerText = name;
+      document.getElementById("price").innerText = price;
+      document.getElementById("number").innerText = num;
+      document.getElementById("total").innerText = total;
+      document.getElementById("address").innerText = address;
+    </script>
+  </body>
+</html>
