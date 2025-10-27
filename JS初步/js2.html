@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* * {
+        box-sizing: border-box;
+      }
+      span {
+        border: 1px solid rgb(201, 149, 158);
+        border-radius: 5px;
+        display: inline-block;
+
+        width: 80px;
+        padding: 5px 10px;
+        margin: 2px;
+        box-shadow: 2px 2px 5px rgba(201, 149, 158, 0.5);
+      }
+      span:hover {
+        background-color: pink;
+        cursor: pointer;
+      } */
+      .container {
+        position: relative;
+        margin: 100px auto;
+        width: 1000px;
+        height: 500px;
+        border-bottom: 2px solid pink;
+        border-left: 2px solid pink;
+        padding: 50px;
+        box-sizing: border-box;
+      }
+      .box {
+        display: flex;
+        position: absolute;
+        bottom: -54px;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width: 200px;
+      }
+      .box span {
+        display: block;
+        width: 100px;
+        height: 300px;
+        background-color: pink;
+      }
+      .box p {
+        text-align: center;
+        font-size: 15px;
+        font-weight: 500;
+      }
+    </style>
+  </head>
+
+  <body>
+    <script>
+      //比较：==   ===是否判断类型  弱类型，不同类型比较总会发生隐式转换
+      //   console.log(1 == "1");//隐式转换后比较   一般判断最好使用===
+      //   console.log(1 === "1");
+
+      //字符串，字符比较都是比各自位置上的字符的ASCII码值大小
+      //   console.log("a" < "b");
+      //   console.log("abc" < "abd");
+
+      //逻辑运算符 &&优先于||   顺序 ！ && ||
+      //   let year = +prompt("请输入年份");
+      //   if ((year % 4 === 0 && year % 100 != 0) || year % 400 === 0) {
+      //     alert(`${year}是闰年`);
+      //   } else {
+      //     alert(`${year}不是闰年`);
+      //   }
+
+      //三元运算符补0
+      //   let num = prompt("请输入一个数字");
+      //   console.log(num < 10 ? 0 + num : num);
+
+      //   let num = 10;
+      //   num += 9;
+      //   console.log(num);
+      //   const Input = document.getElementById("input");
+      //   switch (Input) {
+      //     case "1":
+      //       console.log("存钱1");
+      //       break;
+      //     case "2":
+      //       console.log("取钱2");
+      //       break;
+      //     case "3":
+      //       console.log("查询3");
+      //       break;
+      //     default:
+      //       console.log("输入有误");
+      //   }
+      //数组打印 length属性很方便
+      //   let arr = ["name", "price", "number", "total", "address"];
+      //   for (let i = 0; i < arr.length; i++) {
+      //     console.log(arr[i]);
+      //   }
+
+      //   for (let i = 0; i < 5; i++) {
+      //     for (let j = 0; j < 5; j++) {
+      //       document.write("*");
+      //     }
+      //     document.write("<br>");
+      //   }
+
+      //   for (let i = 1; i < 10; i++) {
+      //     for (let j = 1; j <= i; j++) {
+      //       document.write(`<span>${i}×${j}=${i * j}</span>`);
+      //     }
+      //     document.write("<br>");
+      //   }
+
+      //用对象声明数组
+      //   let arr = new Array(1, 2, 3, 4);
+      //   console.log(arr.forEach((item) => console.log(item)));//forEach方法遍历数组 箭头函数
+
+      //数组增添 push unshift方法 只能在首尾增加
+      //   let arr = [1, 2, 3];
+      //   arr.push(4); //末尾添加 推
+      //   arr.unshift(0); //开头添加 拉？并返回新增后的数组长度
+      //   console.log(arr);
+
+      //数组删除 pop shift 只能删除首尾
+      //   let arr = [1, 2, 3, 4];
+      //   console.log(arr.pop()); //删除末尾 并返回删除的元素
+      //   console.log(arr.shift()); //删除开头 并返回删除的元素
+      //   console.log(arr);
+      //splice可以删除指定元素  起始位置+删除元素个数  同时返回删除的元素数组
+      //   console.log(arr.splice(1, 2)); //删除下标1开始的2个元素  并返回删除的元素组成的数组
+      //   console.log(arr);
+      let arr = [];
+      for (let i = 0; i < 3; i++) {
+        arr.push(+prompt("请输入一个数字"));
+      }
+
+      document.write(`<div class="container">`);
+
+      for (let i = 0; i < arr.length; i++) {
+        document.write(` <div class="box" style="left:${i * 250 + 100}px">
+      <p>${arr[i]}</p>
+      <span style="height:${arr[i]}px "></span>
+      <p>第${i + 1}季度</p>
+    </div>`);
+      }
+
+      document.write(`</div>`); //天才行内style 但是很麻烦 js真的是一点都“不挑”
+    </script>
+  </body>
+</html>
