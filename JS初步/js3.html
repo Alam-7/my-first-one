@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //函数形参中设定默认值 可以避免NAN
+      //   function sum(a = 0, b = 0) {
+      //     document.write(a + b);
+      //   }
+
+      //计算数组中的最大值
+      //   function getMax(Array) {
+      //     let max = Array[0];
+      //     for (let i = 0; i < Array.length; i++) {
+      //       if (Array[i] > max) {
+      //         max = Array[i];
+      //       }
+      //     }
+      //     return max;
+      //   }
+      //   let Array = [];
+      //   for (let i = 1; i <= 5; i++) {
+      //     Array.push(+prompt(`请输入第${i}个数字：`));
+      //   }
+      //   document.write(`最大的数字是：${getMax(Array)}`);
+
+      //函数相关注意点：1.两个相同函数声明后面会覆盖前面 2.形参可以与实参个数不同丢弃或者undefined
+
+      //作用域不同的变量名可以相同
+
+      //函数调用：具名函数声明与使用分离  匿名函数：一般直接执行  例如箭头函数（简化写法）
+      //1.直接调用
+      //   (function () {
+      //     let num = 1;
+      //     console.log(num);
+      //   })(); //后面的括号表示对前面的匿名函数直接调用
+
+      //2.箭头函数  只是写法简化了，一般在一个大代码块内比较好看
+      //   (() => {
+      //     let num = 2;
+      //     console.log(num);
+      //   })(); //内外两个括号分别表示函数的声明和调用
+
+      //匿名函数的参数写法 关键在于立即执行，所以形参和实参都会直接填入
+      //   (function (x, y) {
+      //     console.log(x + y);
+      //   })(3, 4); //内部是形参 外部是实参
+
+      //   ((x, y) => {
+      //     console.log(x + y);
+      //   })(3, 4); //似乎更好看一些 形参直接传进代码块内进行 然后后面附上实参
+      //强推 箭头函数，如果需要立即执行，可以用匿名函数的形式包裹起来  不与外界变量相互影响
+
+      //时间转换器
+      //定义函数
+      //   function getTime(seconds) {
+      //     let h = parseInt((seconds / 60 / 60) % 24);
+      //     let m = parseInt((seconds / 60) % 60);
+      //     let s = parseInt(seconds % 60);
+      //     h = h < 10 ? "0" + h : h;
+      //     m = m < 10 ? "0" + m : m;
+      //     s = s < 10 ? "0" + s : s;
+      //     return `现在是${h}时${m}分${s}秒`;    ////如果想要用函数返回多个值可以用数组
+      //   }
+      //   //输入
+      //   let seconds = +prompt("请输入秒数：");
+      //   //调用
+      //   document.write(getTime(seconds));
+
+      //逻辑中断  &有假则假 ||有真则真
+      //   function Sum(a, b) {
+      //     a = a || 0;
+      //     b = b || 0; //表示当没有输入时 undfined转换为0
+
+      //     return a + b;
+      //   }
+      //   console.log(Sum());
+
+      //   console.log(11 && 22); //22 如果都是真 则输出最后一个真
+      //   console.log(11 || 22); //11 输出第一个真值
+
+      //   console.log(1);
+      //   //除了以下 几种情况 都被转换为true
+      //   console.log(Boolean(""));
+      //   console.log(Boolean(0));//0一般被认为是假 而其他数字都是真
+      //   console.log(Boolean(undefined));
+      //   console.log(Boolean(NaN));
+      //   console.log(Boolean(null));
+      //   console.log(Boolean(false));
+
+      //undefined做任何操作结果都是NaN
+
+      //对象  一种数据类型
+      //定义 ：直接大括号  或者new
+      //注意：一定要加逗号
+      // let person = {
+      //   name: "pink", //字符串名
+      //   age: 18,
+      //   gender: "man",
+      // };
+
+      // let product = {
+      //   name: "小米",
+
+      //   price: 1999,
+      //   address: "beijing",
+      //   releaseTime: 2022,
+      // };
+      // //查询
+      // console.log(person.name);
+      // console.log(product.price);
+
+      //改
+      // product.price = 999;
+      // console.log(product.price);
+
+      //删除
+      // delete product.price;
+      // console.log(product);
+
+      //另一种查询方式
+      // console.log(person["name"]); //方框访问操作符
+      //方框内部一定要加引号 而点后面不能加引号
+
+      //对象的方法
+      // let person = {
+      //   name: "user",
+      //   sayHi: () => {
+      //     console.log("hi~");
+      //   },
+      // };
+      // person.sayHi();
+      //一般的document对象等 可能都是内部封装了这些直接调用函数？
+
+      //遍历对象属性
+      ///1.for in遍历
+      // let person = {
+      //   name: "user1",
+      //   age: 20,
+      //   gender: "man",
+      // };
+      // for (let k in person) {  k==='name'
+      //   console.log(k); //在此处的k是字符串类型的  所以当遍历数组 下标是数字的时候会十分麻烦
+      //   console.log(person[k]); //字符串的方框访问操作
+      //   // console.log(`${k}:${person[k]}`);  //以上两者的简化
+      // }
+
+      // let students = [
+      //   {
+      //     name: "张三",
+      //     age: 18,
+      //   },
+      //   {
+      //     name: "李四",
+      //     age: 19,
+      //   },
+      //   {
+      //     name: "王五",
+      //     age: 17,
+      //   },
+      //   {
+      //     name: "赵六",
+      //     age: 20,
+      //   },
+      // ];
+      // for (let i = 0; i < students.length; i++) {
+      //   for (let k in students[i]) {
+      //     console.log(`${k}:${students[i][k]}`); //遍历数组中的对象
+      //   }
+      // }
+
+      //script只是用于更改和渲染的代码块 甚至可以放到前面写的html中 然后用script作为循环或渲染的方式来更改原本Nederland数据
+
+      //一些script的内置方法  详见mdn 需要了取
+      // console.log(typeof {});
+      // console.log(typeof []);
+      // console.log(typeof null); //object 这是一个历史遗留问题
+      // console.log(Array.isArray([])); //true 判断是否为数组的内置方法
+
+      //Math.random随机数函数  返回0-1之间的随机小数 包括0不包括1  根据所需要的数字来设置
+      // console.log(Math.random());
+      // console.log(parseInt(Math.random() * (10 + 1))); //产生0-10之间的数字
+      // console.log(parseInt(Math.random() * (5 + 1) + 5)); //先产生0-n 的数字然后再加上一个偏移量  那么如果是n-m呢
+      // console.log(parseInt(Math.random() * (m - n + 1) + n)); //d等价于产生0-m-n的数字 再加上n的偏移量
+
+      // let arr = ["red", "green", "blue"];
+      // console.log(arr[parseInt(Math.random() * arr.length)]); //使用arr.length来动态获取 增加代码复用性
+      //n-m随机数函数
+      // function getRandomInt(n,m){
+      //   return parseInt(Math.random() * (m - n + 1) + n);
+      // }
+
+      // let arr=[1,2,3,4,5,6,7,8,9,10];
+      // document.write(arr[parseInt(Math.random()*arr.length)]);
+      //产生数组中的随机元素  那么怎么同时删除呢
+      let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+      let n = parseInt(Math.random() * arr.length); //记录下标
+
+      document.write(arr[n]);
+
+      arr.splice(n, 1); //splice函数定位删除
+
+      for (let i = 0; i < arr.length; i++) {
+        console.log(arr[i]);
+      }
+    </script>
+  </body>
+</html>
