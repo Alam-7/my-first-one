@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    div {
+      width: 200px;
+      height: 200px;
+      background-color: black;
+    }
+    .box1 {
+      border-radius: 50%;
+      background-color: red;
+    }
+    .box2 {
+      width: 100px;
+      height: 100px;
+      background-color: blue;
+    }
+    input {
+      width: 200px;
+      height: 30px;
+      font-size: 16px;
+    }
+    button {
+      display: block;
+      margin: 20px auto;
+      padding: 10px 20px;
+      font-size: 16px;
+    }
+  </style>
+  <body>
+    <!-- <ul>
+      <li>1</li>
+      <li>2</li>
+      <li>3</li>
+    </ul> -->
+
+    <!-- <div></div> -->
+
+    <!-- <input type="text" value="这里是input" data-id="111" /> -->
+    <button></button>
+    <script>
+      //对象变量中存储的是对象的地址
+      //   let obj1 = {
+      //     age: 10,
+      //   };
+      //   let obj2 = obj1; //二者均是在栈中存储的地址
+      //   obj2.age = 20; //依据相同的地址找到相同的对象修改
+      //   console.log(obj1.age); //obg1也会被修改  20
+
+      //一般变量声明优先const  如果修改了可以再改为let
+      //另外注意const声明的对象可以修改
+      // let person={
+      //     name:'张三',
+      //     age:18,
+
+      // }
+      // person.age=20;
+      //根本原因是person中存储的只是地址 地址不可修改，但地址里的对象可以修改
+      //对于对象而言 每一个{}都是一个对象 在堆里面开辟空间并将地址传给栈里的变量
+
+      //获取dom对象
+      //1.css选择器查询
+      //   const box1 = document.querySelector("div");
+      //   const box2 = document.querySelector(".box");
+
+      //   const li = document.querySelector("ul li");
+      //   console.log(li); //返回第一个匹配到的对象  没有则返回null
+      //   li.style.color = "red"; //修改样式
+
+      //   const lis = document.querySelectorAll("ul li"); //获取全部匹配的对象
+      //   console.log(lis); //返回一个li的数组  没有则返回空数组
+      //   lis.style.color = "red"; //错误  lis是一个数组 不能直接修改样式
+
+      //   for (let i = 0; i < lis.length; i++) {
+      //     console.log(lis[i]);
+      //   }
+
+      //但上述数组只是一个伪数组，没有Pop unshift等方法
+
+      //修改dom对象
+      //   const box = document.querySelector("div");
+      //   //   box.innerText = "我是box";
+      //   box.innerText = "<h1>我是box</h1><p>我是一个段落</p>"; //innertext仅仅识别文本 不识别标签元素
+      //   box.innerHTML = "<h1>我是box</h1><p>我是一个段落</p>"; //innerHTML识别标签
+      //
+
+      //   const personArray = ["张三", "李四", "王五", "赵六", "田七", "钱八"];
+      //   const ul = document.querySelectorAll("ul li");
+      //   for (let i = 0; i < ul.length; i++) {
+      //     let randomIndex = Math.floor(Math.random() * personArray.length);
+      //     ul[i].innerText = personArray[randomIndex];
+      //     personArray.splice(randomIndex, 1);
+      //   }
+
+      //修改元素样式属性
+      //1.style.属性=修改值 但需要添加“”字符串  单个元素属性的修改
+      //如果有多个单词 如background-color 需要改为驼峰命名法 backgroundColor
+
+      //   const box = document.querySelector("div");
+      //   box.style.width = "400px";
+      //   box.style.backgroundColor = "red";
+
+      //2.操作类名修改 修改需要一起更改一系列属性的元素  className
+      //   const box = document.querySelector("div");
+      //   box.className = "box1";//不需要. class已经表示类名
+      //   box.className = "box2"; //会覆盖之前的类名   如果要仅仅是添加 而非替代 那么可以“box1 box2”二者相叠加
+
+      //3.通过classList追加，删除样式类  更加方便classList
+      //   const box = document.querySelector("div");
+      //   box.classList.add("box1"); //添加类名 不会覆盖之前的类名(但此处由于属性重复 导致css覆盖)
+      //   box.classList.add("box2");
+      //   box.classList.remove("box1"); //删除类名
+      //   box.classList.toggle("box1"); //切换类名    有则删除 无则添加  如果有按钮 点击触发事件直接切换类名
+
+      // //表单元素属性修改
+      // const inPut = document.querySelector("input");
+      // // console.log(inPut.value); //获取输入框内的值
+      // // console.log(inPut.innerHTML); //输出空语句   获取不到输入内容  input没有innerHTML属性
+      // // console.log(inPut.type); //获取input的类型 text
+      // // console.log((inPut.value = "修改后的input内容")); //修改输入框内的值  赋值操作符返回赋的值
+      // // inPut.checked = true; //修改checkbox的选中状态
+      // inPut.checked = "false"; //checked识别布尔类型 而字符串中只要不是空字符就是true
+
+      // inPut.type = ""; //修改input的类型
+      // const btn = document.querySelector("button");
+      // btn.innerText = "点击我";
+      // btn.disabled = false; //修改按钮的禁用状态
+      // btn.disabled = true; //禁用按钮
+
+      //但以上的元素属性往往不够用 因而有data自定义属性 例如 data-id=""  具有与id本身具有等价的属性地位
+      //使用的时候可以用dataset来获取该id属性
+      // console.log(inPut.dataset.id); //输出之前所加的属性值
+      // console.log(inPut.dataset); //输出data数据库 数组
+
+      //间歇函数  语法 setInterval(函数，时间间隔毫秒)
+      // setInterval(() => {
+      //   console.log("1秒到了");
+      // }, 1000); //每隔一秒回头调用一次
+      //另外注意 如果设置的是有名函数 不要带小括号 直接函数名
+      function fn() {
+        console.log("现在经过了 秒");
+      }
+      // setInterval(fn, 1000);
+      // setInterval(fn(), 1000);//仅仅只是读到这里调用一次 不会使用interval回头调用
+      //那么怎么关闭呢  每个页面都会有很多计时器  这样也就会有很多序号 该序号会在设置时自动返回 所以一定要记得接受
+      setIntervalId = setInterval(fn, 1000);
+      // clearInterval(setIntervalId); //通过该序号来关闭对应的计时器
+      // const btn = document.querySelector("button");
+      // btn.addEventListener("click", () => {
+      //   clearInterval(setIntervalId);
+      // });
+    </script>
+  </body>
+</html>
