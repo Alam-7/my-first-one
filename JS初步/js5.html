@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* .box {
+        position: relative;
+        width: 400px;
+        height: 400px;
+        background-color: pink;
+        text-align: center;
+        line-height: 400px;
+        margin: 100px auto;
+        font-size: large;
+      }
+      button {
+        display: block;
+        position: absolute;
+        bottom: 20px;
+        left: 50%;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 16px;
+      } */
+
+      h2 {
+        /* font-size: 24px; */
+        padding: 50px auto;
+        text-align: center;
+      }
+      .box {
+        display: flex;
+        width: 300px;
+        height: 150px;
+        margin: 20px auto;
+        justify-content: center;
+        align-items: center;
+        background-color: pink;
+      }
+      .box p {
+        font-size: 22px;
+      }
+      button {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- <div class="box">
+      <p>大盒子</p>
+      <button>点击我</button>
+    </div> -->
+
+    <!-- 随机点名案例 -->
+    <!-- <h2>随机点名</h2>
+    <div class="box">
+      <p>姓名是：</p>
+      <span>张飞</span>
+    </div>
+    <button class="begin">开始</button>
+    <button class="stop">停止</button> -->
+
+    <!-- <button></button> -->
+    <!-- <div></div> -->
+    <div class="box"></div>
+    <script>
+      //事件监听：1.事件源  2.事件类型 3.事件函数
+      //事件类型一定要加引号
+      //事件源
+      // const btn = document.querySelector("button");
+      // const box = document.querySelector(".box");
+      //设置事件类型和函数
+      //   btn.addEventListener("click", () => {
+      //     alert("按钮被点击了");
+      //   });
+      // btn.addEventListener("click", () => {
+      //   box.style.display = "none";
+      //   alert("盒子被隐藏了");//警告为什么比盒子的消失要快？ 页面在执行完毕函数之后才会刷新吗 然后先alert了
+      // });//最关键的是代码的执行顺序和浏览器的渲染并非一一对应顺序 在读到隐藏代码后会被放入浏览器预备渲染的队列中（只有在所有的同步代码执行完毕后才会重新渲染） 而alert还是一个优先级很高的特殊浏览器api直接中断浏览器正在进行的任务 要求用户交互 也就导致了隐藏的重新渲染代码被延后
+
+      // //1.获取元素
+      // const btn1 = document.querySelector(".begin");
+      // const btn2 = document.querySelector(".stop");
+      // const name = document.querySelector(".box span");
+
+      // //2.建立数据库
+      // let nameData = [
+      //   "张飞",
+      //   "关羽",
+      //   "刘备",
+      //   "曹操",
+      //   "孙权",
+      //   "诸葛亮",
+      //   "周瑜",
+      //   "司马懿",
+      // ];
+
+      // //每隔一段时间更换span中的数据  因而需要设计定时器
+      // // let timer = setInterval(() => {
+      // //   name.innerText = nameData[parseInt(Math.random() * nameData.length)];
+      // // }, 100);
+
+      // //3.绑定按钮事件
+      // //定义timer
+      // let timer = null;
+
+      // // 点击后开始定时更换
+      // btn1.addEventListener("click", () => {
+      //   timer = setInterval(() => {
+      //     name.innerText = nameData[parseInt(Math.random() * nameData.length)];
+      //   }, 100);
+      //   //防止多次点击
+      //   btn1.disabled = true;
+      //   btn2.disabled = false;
+      // });
+
+      // //点击后暂停计时器
+      // btn2.addEventListener("click", () => {
+      //   console.log("stop");
+      //   clearInterval(timer);
+      //   //记录并删除此时span中的名字(这里也可以在前面记录随机数序列  然后在后面直接用 但是要注意设置全局变量)
+      //   nameData.splice(nameData.indexOf(name.innerText), 1);
+      //   //防止多次点击
+      //   btn2.disabled = true;
+      //   btn1.disabled = false;
+      //   //判断是否元素已经没有
+      //   if (nameData.length === 0) {
+      //     alert("所有人都已经被点完了");
+      //     btn1.disabled = true;
+      //     btn2.disabled = true;
+      //   }
+      // });
+      //发现有bug可能会重复点击
+      //timer未定义？？？？ 作用域仅仅在函数内部 应该定义在外部
+
+      //函数内部
+      // const btn = document.querySelector("button");
+      // btn.addEventListener("click", () => {
+      //   const num = Math.random();
+      //   console.log(num);
+      // }); //此时多次点击没有影响  因为在函数内部声明地变量只是临时变量 没有“修改”num
+
+      // const box = document.querySelector(".box");
+      // box.addEventListener("mouseenter", () => {
+      //   console.log("Jouney~");//鼠标经过事件 没有代码提示 还可以 leave
+
+      // });
+    </script>
+  </body>
+</html>
