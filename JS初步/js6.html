@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      button {
+        width: 50px;
+        height: 30px;
+        background-color: pink;
+      }
+      .fa {
+        width: 400px;
+        height: 400px;
+        background-color: green;
+      }
+      .son {
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <div class="search">
+        <input type="text" placeholder="小米笔记本"> 
+    </div> -->
+
+    <!-- <input type="text">
+<span class=" "></span> -->
+
+    <!-- <button>111</button>
+    <input type="text" /> -->
+
+    <!-- <button></button> -->
+    <ul>
+      <li>11111111111</li>
+      <li>2222222222</li>
+      <li>33333333</li>
+      <li>4444444</li>
+      <li>555555</li>
+      <p>00000</p>
+    </ul>
+
+    <!-- <div class="fa">
+      <div class="son">111</div>
+    </div> -->
+
+    <script>
+      //focus获得焦点   blur失去焦点
+      //keydown键盘按下事件  keyup键盘弹起事件
+      //input输入事件
+      //事件逻辑 获得焦点：。。。。   失去焦点：。。。   一旦输入input 修改文本框内的数值
+
+      //事件对象是一个对象 记录了发生该事件时的一系列信息
+      //   const btn = document.querySelector("button");
+      //   btn.addEventListener("click", (e) => {
+      //     console.log(e);
+      //   }); //其中的e 即event就是该点击事件时的一系列信息
+      //主要有type事件类型  key
+      //   const inPut = document.querySelector("input");
+      //   inPut.addEventListener("keydown", (e) => {
+      //     console.log(e.key);
+      //   });
+
+      //trim()方法清除字符串两端的空格  返回清除后的字符串
+      //   const str = "     66666     "; //在接收数据时删除其两侧的无效空格
+      //   console.log(str.trim());
+      //   console.log(str);
+
+      //环境对象this  受当前环境影响
+      //   function fun() {
+      //     console.log(this);
+      //   }
+      //   fun();//普通函数由window调用 指向window
+
+      //谁调用，this就是谁  this不能在箭头函数中使用
+      //   const btn = document.querySelector("button");
+      //   btn.addEventListener("click", function () {
+      //     this.style.backgroundColor = "red"; //回调
+      //   });
+      //   //this具有代指性 即你不知道this到底是谁 但浏览器知道 你不用再去寻找谁是this
+
+      //回调函数:将函数作为参数 传进另一个函数 例如定时器函数 事件监听内的函数，在事件发生时进行的函数
+
+      //事件流：分为两部分 捕获阶段由外到内  冒泡阶段由内到外
+
+      //DOM.add....(事件类型，事件函数，是否使用捕获机制)//一般默认是false，也就是冒泡阶段执行
+      //   const fa = document.querySelector(".fa");
+      //   const son = document.querySelector(".son");
+      //结果是先儿子后父亲 冒泡返回？  就是冒泡返回，儿子连带父亲冒泡返回(但前提是父辈元素的同名事件)
+      //   fa.addEventListener("click", () => {
+      //     console.log("fa");
+      //   });
+      //   son.addEventListener("click", () => {
+      //     console.log("son");
+      //   });
+      //那么怎么组织冒泡呢
+      //在子代元素事件中添加e.stopPropagation() 前提一定要事件e
+      //   fa.addEventListener("click", () => {
+      //     console.log("fa");
+      //   });
+      //   son.addEventListener("click", (e) => {
+      //     console.log("son");
+      //     e.stopPropagation();
+      //   });
+
+      //事件解绑  新版add remove事件必须要函数实名  匿名函数无法解绑
+      //   function fn() {
+      //     alert("6");
+      //   }
+      //   const btn = document.querySelector("button");
+      //   btn.addEventListener("click", fn);
+      //   btn.removeEventListener("click", fn);
+
+      //注意：mouse(over/out) 与mouse(enter/leave)不同
+      //前者有冒泡 后者没有 推荐后者
+
+      //事件委托：减少事件注册的次数 原理：（冒泡原理）为父级元素绑定事件 点击儿子，没有事件，冒泡到父亲元素产生事件函数
+      //但是丢失了子代元素的区分度
+      //但是：e事件记录中仍然记录着点击的子代对象 target
+      //但但是：子代元素并非都需要这个事件
+      //但但：e事件中也记录了这个标签的名字 tagname
+      const ul = document.querySelector("ul");
+      ul.addEventListener("click", (e) => {
+        if (e.target.tagName === "LI") {
+          //但要求是字符串且大写
+          e.target.style.color = "red";
+        }
+      });
+    </script>
+  </body>
+</html>
