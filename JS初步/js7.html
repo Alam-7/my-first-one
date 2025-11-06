@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      button {
+        /* display: none; */
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: pink;
+        margin: 200px auto;
+      }
+      div {
+        background-color: pink;
+        /* width: 20px; */
+        height: 1500px;
+      }
+      .box {
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+        margin: 50px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+    <!-- <a href="https://www.baidu.com/">百度一下</a> -->
+    <!-- <button>点我</button> -->
+    <div>11111111111111111111111111111111111111111111111111111111111111</div>
+    <script>
+      //阻止冒泡 DOM.stoppropagation
+
+      //阻止默认行为 例如不让表单自动提交到后台(如果没有填写完整)
+      //   const a = document.querySelector("a");
+      //   a.addEventListener("click", (e) => {
+      //     e.preventDefault();
+      //   });
+
+      //其他事件：load页面加载事件 可以绑定给window，也可以绑定给其他比较大的元素
+      //   const btn = document.querySelector("button");
+      //   window.addEventListener("load", () => {
+      //     btn.addEventListener("click", () => {
+      //       alert("6");
+      //     });
+      //   });
+
+      //DOMcontentloaded事件 当文档被解析和加载完成后就可以执行 比上面的window.load快  后者需要等待页面所有（例如图片）加载完成后才执行
+
+      //页面滚动事件  例如当页面滚动到某一位置后再使导航栏固定位置，或者产生其他动态效果
+      //scroll事件  相关判断元素scrollTop被卷去的头部 scrollLeft被卷去的左侧
+
+      //   const btn = document.querySelector("button");
+      //   window.addEventListener("scroll", () => {
+      //     if (document.documentElement.scrollTop >= 100) {//不带单位
+      //       btn.style.display = "block";
+      //     }
+      //   });
+
+      //获取页面的html元素 document.documentElement  页面下拉 html元素向上走
+      //scrollTop属性可读写！！！！！可以用于初始化时的自定义位置
+      //另外 scrollTo是一个方法例如
+      // window.scrollTo(0,0)可以让页面回到首页
+      // const back_btn = document.querySelector("button");
+      // back_btn.addEventListener("click", () => {
+      //   window.scrollTo(0, 0);
+      // });
+
+      //页面尺寸事件：resize
+      //获取元素宽高（可见部分  不包含比那狂 margin 滚动条）  clientWidth属性
+      // const div = document.querySelector("div");
+      // window.addEventListener("resize", () => {
+      //   console.log(div.clientWidth);
+      // });
+
+      //前面的scrollTop只能自己去设置一个固定的像素值 去检测  那么怎么才能更加灵活 让浏览器直接去检测这个距离有多少
+      //元素定位属性 offsetLeft  offsetTop  与自己第一个有定位属性的祖辈元素的距离
+      //   const box = document.querySelector(".box");
+      //   // document.body.clientHight = 3600;
+      //   window.addEventListener("scroll", () => {
+      //     //窗口滚动事件
+
+      //     if (document.documentElement.scrollTop >= box.offsetTop) {
+      //       window.scrollTo(0, 0);
+      //     }
+      //   });
+
+      //transform 转换  translateX（）调整x位置
+      //另外一个获取位置的方法  与offsetTop不同的是它是相对于视口的距离   而clientWidth获取的是实际上元素的可见部分（除去不可见部分的固定属性）
+      //getBoundingClientRect() 返回元素的大小和它相对于视口的位置  是获取实时位置的方法（相对于视口）
+      // const box = document.querySelector(".box");
+      // box.addEventListener("click", () => {
+      //   console.log(box.getBoundingClientRect());//包装在一个对象里
+      // });
+    </script>
+  </body>
+</html>
