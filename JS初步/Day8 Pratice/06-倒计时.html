@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .countdown {
+        width: 240px;
+        height: 305px;
+        text-align: center;
+        line-height: 1;
+        color: #fff;
+        background-color: brown;
+        /* background-size: 240px; */
+        /* float: left; */
+        overflow: hidden;
+      }
+
+      .countdown .next {
+        font-size: 16px;
+        margin: 25px 0 14px;
+      }
+
+      .countdown .title {
+        font-size: 33px;
+      }
+
+      .countdown .tips {
+        margin-top: 80px;
+        font-size: 23px;
+      }
+
+      .countdown small {
+        font-size: 17px;
+      }
+
+      .countdown .clock {
+        width: 142px;
+        margin: 18px auto 0;
+        overflow: hidden;
+      }
+
+      .countdown .clock span,
+      .countdown .clock i {
+        display: block;
+        text-align: center;
+        line-height: 34px;
+        font-size: 23px;
+        float: left;
+      }
+
+      .countdown .clock span {
+        width: 34px;
+        height: 34px;
+        border-radius: 2px;
+        background-color: #303430;
+      }
+
+      .countdown .clock i {
+        width: 20px;
+        font-style: normal;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="countdown">
+      <p class="next">今天是2222年2月22日</p>
+      <p class="title">下班倒计时</p>
+      <p class="clock">
+        <span id="hour">00</span>
+        <i>:</i>
+        <span id="minutes">25</span>
+        <i>:</i>
+        <span id="scond">20</span>
+      </p>
+      <p class="tips">18:30:00下课</p>
+    </div>
+    <script>
+      //获取元素
+      const now = document.querySelector(".next");
+      const hour = document.querySelector("#hour");
+      const mins = document.querySelector("#minutes");
+      const scond = document.querySelector("#scond");
+      const end = document.querySelector(".tips");
+      //实例化
+      const date = new Date();
+
+      //1.获取特定的现在时间  并将其放入now
+      // console.log(+new Date());
+      // console.log(date.getFullYear());
+      now.innerHTML = `今天是${date.getFullYear()}年${
+        date.getMonth() + 1
+      }月${date.getDate()}日`;
+      //2.下课时间放入end
+      end.innerHTML = "20:55:00下课";
+
+      //定义回调函数
+      function time() {
+        //3.1获取现在和将来的时间戳 相减得到相隔时间
+        const n = +new Date();
+        const o = +new Date(
+          `${date.getFullYear()}-${
+            date.getMonth() + 1
+          }-${date.getDate()} 20:55:00`
+        );
+
+        const left = (o - n) / 1000;
+
+        //3.2换算时间
+        let h = parseInt(left / 60 / 60) % 24;
+        let m = parseInt((left / 60) % 60);
+        let s = parseInt(left % 60);
+
+        //3.3小时，分钟和秒的字符串变化
+        h = h < 10 ? "0" + h : h;
+        m = m < 10 ? "0" + m : m;
+        s = s < 10 ? "0" + s : s;
+
+        hour.innerHTML = `${h}`;
+        mins.innerHTML = `${m}`;
+        scond.innerHTML = `${s}`;
+
+        //3.5判断清除定时器
+        if (left <= 0) {
+          clearInterval(intervalId);
+        }
+      }
+      //页面开始时 先调用一次
+      time();
+      //3.4设定定时器 定时更换
+      const intervalId = setInterval(time, 1000);
+      //计时器的调用 函数一定不要加括号 否则就是在计时器运行时调用一次 然后就没有了 传递函数名 实际上传递的是函数地址？每隔一段时间去调用一次
+    </script>
+  </body>
+</html>

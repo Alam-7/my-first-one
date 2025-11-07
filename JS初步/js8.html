@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./swiper-bundle.min.css" />
+    <style>
+      div {
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+      }
+      .swiper {
+        width: 600px;
+        height: 300px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- <ul>
+      <li>111</li>
+    </ul> -->
+    <!-- <div>111</div> -->
+
+    <div class="swiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">Slide 1</div>
+        <div class="swiper-slide">Slide 2</div>
+        <div class="swiper-slide">Slide 3</div>
+      </div>
+      <!-- 如果需要分页器 -->
+      <div class="swiper-pagination"></div>
+
+      <!-- 如果需要导航按钮 -->
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-button-next"></div>
+
+      <!-- 如果需要滚动条 -->
+      <div class="swiper-scrollbar"></div>
+    </div>
+
+    <script src="./swiper-bundle.min.js"></script>
+    <script>
+      var mySwiper = new Swiper(".swiper", {
+        direction: "vertical", // 垂直切换选项
+        loop: true, // 循环模式选项
+
+        // 如果需要分页器
+        pagination: {
+          el: ".swiper-pagination",
+        },
+
+        // 如果需要前进后退按钮
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+
+        // 如果需要滚动条
+        scrollbar: {
+          el: ".swiper-scrollbar",
+        },
+      });
+      //时间对象
+      //实例化
+      //1.当前时间
+      //   const date = new Date();
+      //   console.log(date); //返回当前时间
+      //2.指定时间
+      //   const date_1 = new Date("2022-9-1 22:22:00"); //指定字符串时间
+      //   console.log(date_1);
+
+      //建立实例化对象
+      //   const date = new Date();
+      //实例方法  例如getfullyear 但是要注意一些月份没有12
+      //   const year = date.getFullYear();
+      //   const month = date.getMonth() + 1;
+      //   const day = date.getDay();
+      //   const hour = date.getHours();
+      //   const min = date.getMinutes();
+      //   const seconds = date.getSeconds();
+      //接下来特定格式 需要拼接字符串
+      //如果需要实时更换 需要定时器
+
+      //另外如果要求不高可以直接调用localestring
+      //   console.log(date.toLocaleString());
+
+      //时间戳  上述的正常日期难以直接获得时间差
+      //而时间戳以毫秒为单位  可以先加减 后换算为其他时间单位
+      //用途：将来特定时间-现在时间--》》换算为需要的时间单位（用于倒计时）
+
+      //那么怎么获得某个点的时间戳？？？
+      // //1.gettime()
+      // const date_now = new Date(); //实例化
+      // console.log(date_now.getTime()); //返回现在的时间戳
+      // //2.+new Date()
+      // console.log(+new Date()); //现在的日期自动转为number类型
+      // //3.Date.now()方法 但只有当前的时间戳
+      // console.log(Date.now()); //无需实例化 但只能返回当前时间
+
+      // //指定时间戳  第二种方便 但一定记得new 和+
+      // console.log(+new Date());
+      // console.log(+new Date("2025-11-7 00:00:00"));
+
+      //DOM理解 ：用关系代替身份证号id
+
+      //查找节点
+      //寻找父级节点:parentNode 返回最近的父级元素
+      //寻找子节点： children属性 返回一个所有子级元素节点数组
+      //寻找兄弟节点： nextelementsibling  previouselementsibling 属性 查找上下两个兄弟节点
+
+      //新增节点
+      //页面新增节点：createlement
+      // const div = document.createElement("div");//仅仅是在文档中创建了一个节点 但并没有实际应用（没有告诉放到哪里 body）
+      // div.innerHTML = "1111";
+      // console.log(div);
+      //追加节点：appendelement
+      // const ul = document.querySelector("ul"); //获取父节点
+      // const li1 = document.querySelector("ul li"); //获取子节点
+      // const li2 = document.createElement("li"); //创建li 节点
+      // ul.appendChild(li); //将子节点添加到父节点
+      // li2.innerHTML = "2222";
+      //但这样是在父级节点添加到最后  怎么添加到某个子元素前面？
+      // ul.insertBefore(li2, li1);//在父级元素中将创建的元素添加到某个子元素前面
+      //另外可以仍然根据DOM树 ————>获取父级元素=获取了子元素
+      // ul.insertBefore(li2, ul.children[0]); //表 示 ul的第一个子节点 不管是谁！！ 可以循环向前添加
+
+      //克隆节点cloneNode(布尔值)  如果是true则完全克隆该节点 如果为false(默认)则只克隆该标签，内部的元素不附带
+      // const li2 = ul.children[0].cloneNode();
+      // const li3 = ul.children[0].cloneNode(true);
+      // ul.appendChild(li2);
+      // ul.appendChild(li3);
+
+      // //删除节点
+      // //一定要通过父级元素删除  通过父亲扇儿子
+      // ul.removeChild(li2);
+      //与隐藏节点 display:none不同的是这个操作直接完全删除该节点 而nnone仅仅是隐藏该节点
+
+      //M端事件  移动端触摸事件
+      //1.开始触摸 2.滑动元素  3.结束触摸
+
+      // const box = document.querySelector("div");
+      // box.addEventListener("touchstart", () => {
+      //   console.log("开始摸我了");
+      // });
+      // box.addEventListener("touchmove", () => {
+      //   console.log("开始移动我了");
+      // });
+      // box.addEventListener("touchend", () => {
+      //   console.log("不摸我了");
+      // }); //仅仅在移动端有作用  那么之后的移动端开发中怎么来去“检查”“调试”自己所写的代码？？ 因为与后端开发有明显的不同，前端需要考虑手机这一特殊的交互模式 touch
+      //和appinventor一样？有一个电脑模拟助手？还是安装环境链接手机？？？
+      // box.addEventListener("mouseenter", () => {
+      //   console.log("开始摸我了");
+      // });
+      // box.addEventListener("mousemove", () => {
+      //   console.log("开始移动我了");
+      // });
+      // box.addEventListener("mouseleave", () => {
+      //   console.log("不摸我了");
+      // });
+      //out和over事件有冒泡 儿子触发了父亲也会被触发 而enter leave没有冒泡
+
+      //swiper插件  可以模拟移动端部分功能       直接复制代码 更换内容？
+      //新插件，库的使用 ：1.查看官网文档基本介绍 2.查看demo效果 3.根据文档查看应当的操作流程  4.上手尝试一个类似的  5.引用库，插件代码等产生效果 6.！！！！根据实际情况结合所学知识进行修改和应用
+      //7.不断去尝试和使用一些其他比较典型的用法 8.在脑海中对这个工具有一个初步的理解和认识 并且对他的使用有一个新的定位（能够想到用它）
+
+      //可以利用css的层叠机制进行定制化处理
+    </script>
+  </body>
+</html>
