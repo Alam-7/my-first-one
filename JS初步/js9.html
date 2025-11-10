@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      /* div {
+        width: 400px;
+        height: 400px;
+        background-color: pink;
+        margin: 300px auto;
+        font-size: large;
+        line-height: 400px;
+        text-align: center;
+      } */
+    </style>
+  </head>
+
+  <body>
+    <div>我是广告</div>
+    <script>
+      //延时函数：setTimeout操作语法与setinterval相同
+      //   let timer = setTimeout(() => {
+      //     console.log("时间到了");
+      //   }, 3000);
+      //   clearTimeout(timer);//单线程js进行后面的清除操作导致计时器失效
+
+      //获取盒子元素
+      //   const box = document.querySelector("div");
+      //定时器
+      //   setTimeout(() => {
+      //     box.style.display = "none";
+      //   }, 3000);
+
+      //V8引擎 js解析器
+      //由于为了处理页面与用户交互的逻辑 因而Js设计为单线程
+      //那么任何处理 消耗时间很长的过程呢
+      //同步与异步：用做饭的按流程走 和煮水的过程中去处理其他事情做比喻
+      //同步任务均在主线程上进行，形成一个执行栈
+      //而异步任务统一全部放到任务队列中
+
+      //事件循环：优先执行主线程  遇到异步操作后推给浏览器处理 浏览器处理完毕后再把要执行的操作推到任务队列   当主线程处理完后总会去查看是否任务队列中有任务 如果有就执行 形成一个主线程，浏览器，任务队列的三角循环
+    </script>
+  </body>
+</html>
