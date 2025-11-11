@@ -41,6 +41,109 @@
       //而异步任务统一全部放到任务队列中
 
       //事件循环：优先执行主线程  遇到异步操作后推给浏览器处理 浏览器处理完毕后再把要执行的操作推到任务队列   当主线程处理完后总会去查看是否任务队列中有任务 如果有就执行 形成一个主线程，浏览器，任务队列的三角循环
+
+            //window内location对象
+      // console.log(location); //包含window当前位置有关的属性
+      // location.href =
+      //   "http://my.bupt.edu.cn/xs_index.jsp?urltype=tree.TreeTempUrl&wbtreeid=1541";
+      //直接调整当前的window页面的地址
+
+      //定时跳转功能：定时器+location的href属性跳转
+      // setTimeout(() => {
+      //   location.href =
+      //     "http://my.bupt.edu.cn/xs_index.jsp?urltype=tree.TreeTempUrl&wbtreeid=1541";
+      // }, 3000);
+
+      //URL地址中#后的时hash值  表示在某一个网站中的不同子页面之间的转换
+      // console.log(location.hash);
+
+      //方法:reload  刷新   传入true参数时表示强制刷新
+
+      // const reload = document.querySelector(".reload");
+      // reload.addEventListener("click", () => {
+      //   // location.reload();
+      //   // location.reload(true);//强制刷新 相当于ctir+f5
+      // });
+
+      //loaction对象：记录与页面的地址URL相关的属性和方法 可以对地址进行一些操作
+      //navigator对象 记录浏览器自身相关的信息
+      // console.log(navigator);
+
+      //history对象:主要用于调整页面的前进和后退  forward和back方法  但是现在也有go(1,-1)方法，比较方便
+
+      //ex:立即执行函数的其他写法
+      // //一般
+      // (function(){})();
+      // //也可以
+      // !function(){}//在function的前面添加一些算数符号表明其是一个整体
+
+      //本地存储:类似于一个浏览器为你带的一个小仓库 例如浏览器的搜索框，保存之前搜索的历史
+
+      //1.localstorage本地存储对象
+      //1.1键值对存储
+      // localStorage.setItem("uname", "zhangsan");
+      // //1.2查找
+      // console.log(localStorage.getItem("uname"));
+
+      // // //1.3 remove删除
+      // // localStorage.removeItem("uname"); //通过键来删除和查找
+
+      // //1.4改
+      // localStorage.setItem("uname", "lisi"); //通过再次设置来修改
+      // console.log(localStorage.getItem("uname"));
+
+      //本地存储只能存储字符串剋行 会进行隐式转换
+      // localStorage.setItem("age", 18);
+      // console.log(typeof localStorage.getItem("age") === "number");//false
+      // console.log(typeof localStorage.getItem("age") === "string");//true
+
+      //sessionstorage 存储时间短：关闭浏览器即销毁 而local类似于存储到硬盘 浏览器关闭仍不销毁
+      //基本用法与local类似
+
+      //能够发现之前所存储的都仅仅是简单的键值对，那么如果有较为复杂的数据类型，类似于对象该怎么存储
+      //如果直接存储可以发现 object根本放不进去
+      //所以一般应该————>>先将object中的所有数据转换为json字符串  然后再将此字符串存储到键值对中
+      // const person = {
+      //   name: "张三",
+      //   age: 18,
+      // };
+      // // console.log(person);
+      // localStorage.setItem("person", JSON.stringify(person)); //将person对象通过JSON方法转换为json字符串
+      // localStorage.removeItem("uname");
+      // localStorage.removeItem("age");//修改之前在该网页下的本地存储历史
+
+      //JSON: stringfy将对象转换为JSON字符串  而parse将字符串再转换为对象
+      // console.log(JSON.parse(localStorage.getItem("person")));//之后就可以再使用这个对象去使用
+
+      //一般的页面数据操作 进行完一次操作后就消失
+      //因而本次应当将数据都存储到本地存储中去
+      //形成一个本地存储为核心的数据渲染逻辑：刷新时从本地渲染数据 修改和添加时仍对本地操作 下次渲染时从本地取
+
+      //数组处理方法拓展：map() join()
+      //以前在渲染浏览器的时候是根据数据库 然后使用模板字符串不断循环更改节点的数据  或者是取出需要修改的小节点，然后通过索引标记用数据库中的数据替换节点中的数据
+      //如果需要修改或遍历数据库一般需要对这个对象数组进行一系列的操作
+      //而有没有更加简便的处理数据的方法？？？
+      //map方法 也称为映射  可以遍历处理数据，并i企鹅返回新的数组
+      // const arr = ["red", "blue", "green"]; //一个原始数组
+      //语法：
+      // const newArr = arr.map(function (ele, index) {
+      //   //逐个遍历查看
+      //   // console.log(ele);
+      //   // console.log(index);//索引
+
+      //   //修改
+      //   return index + ele; //对每隔数组对象返回它修改后的对象数据内容 注意这里使用了return修改，而没有将每隔元素抽出来直接修改
+      // }); //通过map遍历对数组创建一个回调函数来处理每一个元素
+
+      // console.log(newArr); //返回了修改后的数组
+
+      //join方法:将数组转化为字符串（多个数据转化为一个字符串数据）
+      // console.log(arr.join()); //小括号为空 默认以逗号分隔
+      // console.log(arr.join(" ")); //小括号内为新建的分割符
+      // console.log(arr.join("")); //但是为空的时候没有分割符
+
+      //以上两个函数都是直接多数组进行操作 并且返回修改后的新数组
     </script>
   </body>
 </html>
+
