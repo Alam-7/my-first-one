@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      div {
+        width: 200px;
+        height: 200px;
+        background-color: pink;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea name="" id="text" placeholder="请不要输入违规词汇哦"></textarea>
+    <button>提交</button>
+    <div></div>
+    <script>
+      //正则表达式：是一种匹配字符的算法模式，在各个语言中大都可用
+      //主要逻辑：定义规则+判断匹配
+      //语法：/表达式/  表达式是等待匹配的字符串
+
+      //字符串：
+      //   const str = "正则表达式";
+      //   //匹配规则:
+      //   const reg = /正/; //正则表达式的写法表明这是一个正则表达式对象，内部包含一系列方法
+      //判断是否匹配：
+      //   console.log(reg.test(str)); //调用测试方法检测str字符串是否含有待测试字符串  返回布尔值
+
+      //exec方法  返回数组  数组中包含匹配有关的一些数据
+      //   console.log(reg.exec(str));
+
+      //元字符 是一种具有特殊含义的字符 提高了匹配的灵活性 否则功能非常局限
+      //例如：【a-z】表示这26个字母
+      //分类：
+      //1.边界符： ^放在表达式前面表示要求以该表达式开头 $放在结尾表示以该表达式结尾  两者一起出现表示与该字符串精确匹配
+
+      //   console.log(/^哈/.test("哈"));
+      //   console.log(/哈$/.test("哈"));
+      //   console.log(/^哈$/.test("哈哈")); //一种个人解释：在进行匹配的而过程中^首先与第一个哈进行比配并标记 然后紧接着用$匹配发现它后面还有字符 因而匹配失败
+
+      //2.量词:*重复>=0（有种通选符的感觉?只要有就行）     +重复>=1（＋1表示至少重复一次 有重复的）      ?重复0或者1次（有种疑问的感觉 要么不重复要么仅重复一次）
+      //位置一般放在表达式的正后方 直接作用于该表达式
+      //   console.log(/哈*/.test("哈"));
+      //   console.log(/哈+/.test(""));
+      //   console.log(/^哈?$/.test("哈哈哈")); //注意中英文的问号非常像
+      //   console.log(/哈?/.test("哈哈哈")); //为什么仅仅使用？ 反而会true呢  前者是精确匹配这一个或者0个  而后者因为正则表达式采取贪婪匹配 只要检测到重复一个或者零个哈就返回true
+      //   console.log(/^哈*$/.test("哈哈")); //表示以大于等于0个哈开头并且结尾  类似于精确匹配n个哈，不能有别的
+
+      //{n}直接表示该表达式出现几次
+      //   console.log(/^哈{4}$/.test("哈哈"));
+      //   console.log(/^哈{4}$/.test("哈哈哈哈"));
+      //{n,}表示大于等于n次匹配成功.
+      //   console.log(/^哈{4,}$/.test("哈哈哈哈"));
+      //   console.log(/^哈{4,}$/.test("哈哈哈哈哈哈"));
+      //{n,m}表示从n到m个匹配成功  注意括号能不能有其他符号 包括空格
+      //   console.log(/^哈{2,4}$/.test("哈"));
+      //   console.log(/^哈{2,4}$/.test("哈哈"));
+      //   console.log(/^哈{2,4}$/.test("哈哈哈"));
+      //   console.log(/^哈{2,4}$/.test("哈哈哈哈哈哈"));
+
+      //这里注意一个技巧：使用的时候一般最好思考一下使用精确匹配 更加可控制 否则可能会产生一些意想不到的效果
+
+      //字符类 [abc]表示表达式内的字符出现且仅出现一个 也可以搭配量词符使用
+      //   console.log(/^[abc]$/.test("a"));
+      //   console.log(/^[abc]$/.test("ab")); //false
+      //叠加使用
+      //   console.log(/^[abc]{2}$/.test("ab")); //表示出现 任意n个
+
+      //字符类简化：[a-z]表示从a到z的字符
+      //   console.log(/^[a-z]$/.test("a"));
+      //   console.log(/^[a-z]$/.test("2"));
+      //多个范围的并集使用 :例如检查大小写字母+数字
+      //   console.log(/^[a-zA-Z0-9]*$/.test("2zs643d")); //注意中间不要留有空格
+      //   console.log(/^[a-zA-Z0-9]*$/.test("2zs643d李"));
+
+      //那如果要限定特定字符的话 应该只能逐个输入了
+      //注意：对正则表达式的理解可能需要链接多个复合写法去看 量词控制数字 首尾符控制匹配方式 字符类匹配特定字符
+
+      //字符类之：^取反符号 放在[]内部 表示除了这些
+      //   console.log(/^[^a-zA-Z0-9]*$/.test("张三"));
+      // .匹配换行符意外的任何单个字符 排出换行符
+
+      //预定义字符：例如\d表示[0-9]数字  \w表示[]匹配任意子目数字下划线  注意\d的\不要与正则/混淆
+
+      //修饰符：i ignore忽略表示不区分大小写匹配    g global表示匹配所有满足表达式的结果(因为正常的正则表达式执行贪婪匹配并不匹配所有 而g后可以匹配字符串中全部的)
+
+      //replace替换方法  replace(正则表达式，替换内容)
+      //   const str = "手要麻了";
+      //   console.log(str);
+      //   const newstr = str.replace(/手/i, "脚"); //该方法并不直接修改字符串 因而const并不会报错 新的字符串以返回值返回
+      //   console.log(newstr);
+      //   const str = "Java 是什么 就是Java";
+      //   console.log(str.replace(/java/gi, "*")); //匹配所有不区分大小写的java 并替换为*
+
+      //获取元素
+      const input = document.querySelector("#text");
+      const btn = document.querySelector("button");
+      const output = document.querySelector("div");
+      //绑定点击事件
+      btn.addEventListener("click", () => {
+        const tx = input.value;
+        if (!tx) {
+          alert("输入内容不能为空！");
+        }
+        output.innerHTML = tx.replace(/傻逼*/g, "**");
+      });
+    </script>
+  </body>
+</html>
