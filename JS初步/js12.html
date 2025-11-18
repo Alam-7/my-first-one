@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //对象创建的三种方法：1.对象字面量直接创建 2.new object出来
+      //！！！！！3.构造函数创建：类似于一个对象工厂 可以将重复创建的对象中相同不放呢抽取出来的函数 然后通过输入变量值 来new出来
+      //   function Pig(name, age, gender) {
+      //     this.name = name;
+      //     this.age = age;
+      //     this.gender = gender;
+      //   } //这里的this指向调用Pig函数的Object对象？
+      //   const Peppa = new Pig("佩奇", 6, "男");
+      //   const Gorge = new Pig("乔治", 5, "nv");
+      //   console.log(Peppa);
+      //注意构造函数的首字母要大写 便于识别
+
+      //new实例化过程
+      //是的，new的过程中首先创建一个对象，然后this指向这个对象，执行构造函数内的属性代码，最后返回新对象
+
+      //实例成员：通过构造函数实例化的对象 它们结构相同但值不同  并且彼此之间互不影响
+      //静态成员：构造函数中的属性和方法
+      //静态成员类似于模板的属性和状态（是工厂的所有产品都会有的静态属性）  而实例成员则是已经实例，产出的成品 后续可以自行添加自己的属性和方法
+      //工厂模板 和产品的区别
+
+      // const str = "123";
+      // console.log(str.length);//有属性
+      // str是基本数据类型为什么有属性？  在底层对str进行了实例化
+      // 即  const str=new String("123")
+
+      //对象常用的三个静态方法:keys(获取对象中所有的属性名 避免了for in循环) values(获取值)二者都返回数组
+      // const o = { name: "郭", age: "18" };
+      // // console.log(Object.keys(o)); //返回属性数组
+      // // console.log(Object.values(o)); //返回值组
+      // //assign拷贝方法
+      // const oo = {};
+      // Object.assign(oo, o); //注意顺序
+      // console.log(oo);
+      // //另外可以用assign来新增属性
+      // Object.assign(o, { gender: "男" });
+      // console.log(o);
+
+      //数组的reduce方法:对数组中的两个元素进行处理实现累加求和
+      // const arr = [1, 2, 3];
+      // let start = 0;
+      // console.log(
+      //   arr.reduce((prev, current) => {
+      //     return prev + current;
+      //   }, start)
+      // ); //最终返回求和的结果
+      //实质上是临时创建一个prev变量 同时遍历数组 进行return后的操作 然后将返回值作为下一次的prev
+
+      //注意如果要对对象数组进行处理 初始值不要还说呢攻略否则会自动拿第一个对象整体作为初始值导致未定义行为
+
+      //巧妙运用数组和字符串的一系列方法大有裨益
+      //   const spec = { size: "40*40cm", color: "黑色" };
+      //   //正常时可以先解构获取两个变量值 然后再拼接在一起  但是有了数组和字符串方法后就可以
+      //   //1.values获取所有的值 2.将返回的数组join("/")就可以得到一个完整的拼接字符串
+      //   console.log(Object.values(spec).join("/"));
+      //理解数据的类处理 ：这些是对象里面的值 这些是得到的数据数组 join就可以合并数组得到字符串
+
+      //数组的from方法：将伪数组转换为真数组 Array.from返回真数组
+
+      //字符串方法：split()分割得到数组 substring(start,end)截取字符串的索引号间字符串
+      //number方法：tofixed保留小数位数的设置
+      // const num = 10.13;
+      // console.log(num.toFixed(1));
+    </script>
+  </body>
+</html>

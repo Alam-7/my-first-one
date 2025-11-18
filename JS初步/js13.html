@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //构造函数时如果带有静态方法 在实例化的时候会多次创建方法的内存 从而导致大量空间浪费
+      //那么怎么解决呢？  将共享的方法抽取出来 放到哪里？>>原型中 然后使其通过原型链调用共享方法
+      //从而是的该方法占据共同的空间
+
+      //原型对象中的this和构造函数中的this都指向实例对象 因为都是该已经实例化的对象去调用的，虽然加到了原型的身上
+      //用一下方法就可以自定义所需要的原型方法 非常方便（要注意this的使用）
+      //   arr = [1, 2, 3];
+      //   Array.prototype.sum = function () {
+      //     console.log(this.reduce((prev, current) => prev + current, 0));
+      //   };
+      //   Array.prototype.max = function () {
+      //     console.log(Math.max(...this));
+      //   };
+      //   //注意箭头函数没有this指向调用者 而是通过作用域链寻找 window
+      //   arr.sum();
+      //   arr.max();
+
+      //constructor（构造函数）:存在于每个原型对象中  指向该原型对象的构造函数（理解和区分构造函数 实例化对象 原型对象之间的关系）
+      //使得原型对象找到产生实例化对象的构造函数
+
+      //构造函数
+      //   function Star(name) {
+      //     this.name = name;
+      //   }
+      //添加原型方法
+      //   Star.prototype.sing = function () {
+      //     console.log("sing");
+      //   };
+      //   //如果要再添加一个呢？
+      //   Star.prototype.dance = function () {
+      //     console.log("dance");
+      //   };
+      //如果更的话似乎仍然需要这样下去
+      //那如果我想一次性定义完
+      //   Star.prototype = {
+      //     constructor: Star,
+      //     sing: function () {
+      //       console.log("sing");
+      //     },
+      //     dance: function () {
+      //       console.log("dance");
+      //     },
+      //   };
+      //   console.log(Star.prototype); //发现除了原型带的方法外 constructor被替换掉了 因而需要在赋值的时候重新指向构造函数
+
+      //构造函数可以和原型对象互相找到 那通过构造函数实例化的对象儿子呢 可以通过__proto__属性找到原型对象
+
+      //   ldh = new Star("刘德华"); //创建实例对象
+      //   //   console.log(ldh.__proto__);
+      //   //   console.log(ldh.__proto__ === Star.prototype);
+      //   //但是注意__proto__是只读对象 不能通过它来添加方法????
+      //   //   ldh.__proto__.sing = function () {
+      //   //     console.log("sing");
+      //   //   };
+      //   //   console.log(ldh.__proto__);
+      //   //   ldh.sing();//还可以添加方法
+      //   //说明仅仅是不能赋值？
+      //   ldh.__proto__ = function sing() {
+      //     console.log("sing");
+      //   };
+
+      //   console.log(ldh.__proto__);
+      //   ldh.__proto__(); //可以修改???
+
+      //区分 prototype constructor __proto__分别在哪里 分别指向谁
+      //至此三者形成了一个完整的三角关系
+
+      //继承：既然有了原型：可以将一些共有的东西放在这里
+      //那么考虑一个问题 要去定义两个函数分别产生男人和女人 但是它们都是人这两个构造函数有都具有一些共享的属性和方法
+      //那么应该放在哪里呢？  放在原型里，直接再定义一个父级对象，将子代的原型直接赋值父级构造函数，直接用父级函数替代现有的原型
+      //仍然需要注意原型中的constructor指向
+      //但是发现现在想要给子代函数的原型单独添加一个方法 发现另一个函数也具有了这个方法 原因就是二者的原型完全一致了
+      //因此需要注意在设置父级对象时仍然要有所区分 那造出两个形式内容一样但是不一样的父级对象？
+      //需要再次抽取父级对象 造一个父级的构造函数
+
+      //   const person = {
+      //     eyes: 2,
+      //     legs: 2,
+      //   };//人的特性
+      //1.首先创建父级构造函数
+      //   const Person = function () {
+      //     this.eyes = 2;
+      //     this.legs = 2;
+      //   }; //新建一个原型的构造函数  供后续新建原型对象
+      //   //2.子级构造函数
+      //   const woman = function () {
+      //     gender: "女";
+      //   };
+      //   //3.通过父级构造函数new实例化创建新原型
+      //   woman.prototype = new Person();
+      //   woman.prototype.constructor = woman;
+      //   //添加自己的原型方法
+      //   woman.prototype.baby = function () {
+      //     console.log("baby");
+      //   };
+
+      //   const man = function () {
+      //     gender: "男";
+      //   };
+      //   man.prototype = new Person();
+      //   man.prototype.constructor = man;
+      //   //实例化
+      //   const gril1 = new woman();
+      //   const boy1 = new man();
+      //   //但是两个构造函数共用了一个原型对象  无法差异化添加属性方法
+      //   //因而需要每次均重新建立一个person对象 使其不在同一个内存区
+      //   gril1.baby();
+      //   console.log(man.prototype);
+
+      //任意一个原型对象都是一个对象因而具有自己的对象原型即object prototype是最大的对象原型，而其指向null是原型链的末尾
+      //即对象原型尽管是最大的也仍然是对象 它的原型对象指向null
+      //区分：原型对象prototype 与对象原型（对象的原型）[[ptototype]]
+      //   console.log(Object.prototype.__proto__);
+
+      //instanceof运算符用于查找某个实例对象是否属于某个原型所在的原型链上
+
+      //   const Person = function (name) {
+      //     this.name = name;
+      //   };
+      //   const man = new Person("小A");
+      //   console.log(man instanceof Person); //检查是否处在这个原型链上
+    </script>
+  </body>
+</html>

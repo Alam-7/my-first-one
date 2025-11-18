@@ -80,9 +80,9 @@
 
       //字符类之：^取反符号 放在[]内部 表示除了这些
       //   console.log(/^[^a-zA-Z0-9]*$/.test("张三"));
-      // .匹配换行符意外的任何单个字符 排出换行符
+      // .匹配换行符意外的任何单个字符 排除换行符
 
-      //预定义字符：例如\d表示[0-9]数字  \w表示[]匹配任意子目数字下划线  注意\d的\不要与正则/混淆
+      //预定义字符：例如\d表示[0-9]数字   \w表示[]匹配任意字母数字下划线   注意\d的\不要与正则/混淆
 
       //修饰符：i ignore忽略表示不区分大小写匹配    g global表示匹配所有满足表达式的结果(因为正常的正则表达式执行贪婪匹配并不匹配所有 而g后可以匹配字符串中全部的)
 
@@ -95,17 +95,17 @@
       //   console.log(str.replace(/java/gi, "*")); //匹配所有不区分大小写的java 并替换为*
 
       //获取元素
-      const input = document.querySelector("#text");
-      const btn = document.querySelector("button");
-      const output = document.querySelector("div");
-      //绑定点击事件
-      btn.addEventListener("click", () => {
-        const tx = input.value;
-        if (!tx) {
-          alert("输入内容不能为空！");
-        }
-        output.innerHTML = tx.replace(/傻逼*/g, "**");
-      });
+      // const input = document.querySelector("#text");
+      // const btn = document.querySelector("button");
+      // const output = document.querySelector("div");
+      // //绑定点击事件
+      // btn.addEventListener("click", () => {
+      //   const tx = input.value;
+      //   if (!tx) {
+      //     alert("输入内容不能为空！");
+      //   }
+      //   output.innerHTML = tx.replace(/傻逼*/g, "**");
+      // });
     </script>
   </body>
 </html>
