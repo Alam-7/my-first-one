@@ -72,33 +72,63 @@
   </div> -->
 
     <script>
-      //核心功能：利用面向对象编程 当发生点击事件时创建相同形式的modal盒子，并且具有相同的方法，主要考察对象的封装，可复用性，this的指向
+       //核心功能：利用面向对象编程 当发生点击事件时创建相同形式的modal盒子，并且具有相同的方法，主要考察对象的封装，可复用性，this的指向
       //1.创建modal盒子 利用构造函数 也就是首先建立一个工厂
       const Modal = function (title = "", message = "") {
-        //为什么要用this 他的指向在这里是谁？
+        //公共属性
+        this.title = title;
+        this.message = message;
+
+        //为什么要用this 他的指向在这里是谁？构造函数和他的原型中的this都指向实例化后的调用者即实例化对象
         //1.1创建节点
         this.modalBox = document.createElement("div");
         //1.2添加css
-        this.modalbox.className = "modal";
+        this.modalBox.className = "modal";
         //1.3添加内容
         this.modalBox.innerHTML = `<div class="modal">
     <div class="header">$${title} <i>x</i></div>
     <div class="body">${message}</div>
   </div> `;
       };
-      //1.4为工厂的模板添加方法属性 因为之后的点击和删除都是共享的
+
+      //1.4 Open      为工厂的模板添加方法属性 因为之后的点击和删除都是共享的
       Modal.prototype.open = function () {
-        //直接添加到文档页面 this指向调用open的子对象
-        document.append(this.modalBox);
+        //1.4.1提前检验 如果已经有了就删除这个节点  避免多次叠加
+        const box = document.querySelector(".modal");
+        box && box.remove();
+        //1.4.2直接添加到文档页面 this指向调用open的子对象
+        document.body.appendChild(this.modalBox);
+
+        //1.4.3绑定close事件
+        this.modalBox.querySelector("i").addEventListener("click", () => {
+          //要求点击后删除这个节点 this应当指向实例化对象 因而可以使用箭头函数使其到上一级作用域查找
+          // console.log(this);//指向modal实例化对象
+          this.close();
+        });
       };
 
-      //2.创建孩子
-      const delBox = new Modal("温馨提示", "您没有删除权限操作");
+      //因为后续的close事件要求必须出现open 所以在Open的同时就可以绑定close事件 而且不影响 因为只有open了才能close
+      //1.5 Close
+      Modal.prototype.close = function () {
+        document.body.removeChild(this.modalBox);
+      };
 
-      //3.调用孩子的方法
-      const del = document.querySelector("#delet");
+      //至此工厂已经建立完成 只要在触发事件的时候调用工厂生产产品即可
+      //
+      //
+      //
+      //2.事件绑定 生产产品
+      const del = document.querySelector("#delete");
       del.addEventListener("click", () => {
-        delBox.open();
+        //创建孩子并添加到web中
+        const delmodal = new Modal("温馨提示", "您没有删除权限操作");
+        delmodal.open(); //这个时候也同时绑定了close事件后续点击后自动生效
+      });
+
+      const login = document.querySelector("#login");
+      login.addEventListener("click", () => {
+        const logmodal = new Modal("再次提示", "您还没有注册！");
+        logmodal.open();
       });
       //
       //
@@ -160,3 +190,4 @@
     </script>
   </body>
 </html>
+
